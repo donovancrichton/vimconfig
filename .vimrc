@@ -1,4 +1,3 @@
-setterm=builtin_ansi
 syntax on
 
 
