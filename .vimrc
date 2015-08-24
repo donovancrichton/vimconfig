@@ -10,3 +10,4 @@ hi function ctermfg=Brown cterm=Bold
 :set tabstop=3
 :set expandtab
 :set number
+:set ruler
