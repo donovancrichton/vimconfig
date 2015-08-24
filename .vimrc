@@ -1,6 +1,5 @@
-execute pathogen#infect()
+setterm=builtin_ansi
 syntax on
-filetype plugin indent on
 
 
 colorscheme slate
