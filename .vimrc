@@ -1,6 +1,6 @@
 syntax on
 
-
+au BufRead,BufNewFile *.pddl setf lisp
 colorscheme slate
 hi comment ctermfg=LightGrey
 hi statement ctermfg=Red cterm=Bold
