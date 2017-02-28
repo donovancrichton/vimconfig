@@ -1,6 +1,8 @@
+execute pathogen#infect()
 syntax on
 
-au BufRead,BufNewFile *.pddl setf lisp
+filetype plugin indent on
+au BufRead,BufNewFile *.p™ddl setf lisp
 colorscheme slate
 hi comment ctermfg=LightGrey
 hi statement ctermfg=Red cterm=Bold
