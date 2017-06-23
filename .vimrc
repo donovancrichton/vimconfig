@@ -3,7 +3,7 @@ syntax on
 
 filetype plugin indent on
 au BufRead,BufNewFile *.p™ddl setf lisp
-colorscheme desert
+colorscheme ron
 hi comment ctermfg=LightGrey
 hi statemant cterm=Bold
 hi function cterm=Bold
