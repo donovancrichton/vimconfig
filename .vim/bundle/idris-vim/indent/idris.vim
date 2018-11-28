@@ -19,38 +19,38 @@ if !exists('g:idris_indent_if')
   " if bool
   " >>>then ...
   " >>>else ...
-  let g:idris_indent_if = 3
+  let g:idris_indent_if = 2
 endif
 
 if !exists('g:idris_indent_case')
   " case xs of
   " >>>>>[]      => ...
   " >>>>>(y::ys) => ...
-  let g:idris_indent_case = 5
+  let g:idris_indent_case = 2
 endif
 
 if !exists('g:idris_indent_let')
   " let x : Nat = O in
   " >>>>x
-  let g:idris_indent_let = 4
+  let g:idris_indent_let = 2
 endif
 
 if !exists('g:idris_indent_rewrite')
   " rewrite prf in expr
   " >>>>>>>>x
-  let g:idris_indent_rewrite = 8
+  let g:idris_indent_rewrite = 2
 endif
 
 if !exists('g:idris_indent_where')
   " where f : Nat -> Nat
   " >>>>>>f x = x
-  let g:idris_indent_where = 6
+  let g:idris_indent_where = 2
 endif
 
 if !exists('g:idris_indent_do')
   " do x <- a
   " >>>y <- b
-  let g:idris_indent_do = 3
+  let g:idris_indent_do = 2
 endif
 
 setlocal indentexpr=GetIdrisIndent()

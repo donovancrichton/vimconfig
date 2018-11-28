@@ -10,13 +10,27 @@
 
 # hlsearch on (H) or off (h):
 ~h
+# Last Search Pattern:
+~MSle0~/factorial
+
+# Last Substitute String:
+$
+
 # Command Line History (newest to oldest):
-:wq
-|2,0,1543268303,,"wq"
 :q!
-|2,0,1543209685,,"q!"
+|2,0,1543292039,,"q!"
+:wq
+|2,0,1543271482,,"wq"
+:w
+|2,0,1543270671,,"w"
+:/factorial
+|2,0,1543269046,,"/factorial"
 
 # Search String History (newest to oldest):
+? @$
+|2,1,1543271033,,"@$"
+? factorial
+|2,1,1543269046,,"factorial"
 
 # Expression History (newest to oldest):
 
@@ -25,33 +39,294 @@
 # Debug Line History (newest to oldest):
 
 # Registers:
-""1	LINE	0
+"0	LINE	0
 	hi comment ctermfg=LightGrey
-|3,1,1,1,1,0,1543268294,"hi comment ctermfg=LightGrey"
+|3,0,0,1,1,0,1543271033,"hi comment ctermfg=LightGrey"
+""1	LINE	0
+	data Parameter = P
+|3,1,1,1,1,0,1543271245,"data Parameter = P"
+"2	LINE	0
+	mutual
+|3,0,2,1,1,0,1543271245,"mutual"
+"3	LINE	0
+	  mix1 : 
+|3,0,3,1,1,0,1543271244,"  mix1 : "
+"4	LINE	0
+	hi comment ctermfg=LightGrey
+|3,0,4,1,1,0,1543268294,"hi comment ctermfg=LightGrey"
 
 # File marks:
-'0  6  14  ~/.vimrc
-|4,48,6,14,1543268303,"~/.vimrc"
-'1  1  65  ~/.vimrc
-|4,49,1,65,1543209685,"~/.vimrc"
-'2  1  65  ~/.vimrc
-|4,50,1,65,1543209685,"~/.vimrc"
-'3  1  70  ~/.vimrc
-|4,51,1,70,1543209569,"~/.vimrc"
-'4  1  70  ~/.vimrc
-|4,52,1,70,1543209569,"~/.vimrc"
+'0  1  0  ~/.bashrc
+|4,48,1,0,1543292039,"~/.bashrc"
+'1  14  0  ~/Project/Test.idr
+|4,49,14,0,1543271482,"~/Project/Test.idr"
+'2  144  10  ~/.vim/bundle/idris-vim/indent/idris.vim
+|4,50,144,10,1543271069,"~/.vim/bundle/idris-vim/indent/idris.vim"
+'3  8  0  ~/.vim/bundle
+|4,51,8,0,1543271034,"~/.vim/bundle"
+'4  3  8  ~/Project/Test.idr
+|4,52,3,8,1543271027,"~/Project/Test.idr"
+'5  5  8  ~/Project/Test.idr
+|4,53,5,8,1543271027,"~/Project/Test.idr"
+'6  1  4  ~/Project/README.md
+|4,54,1,4,1543270493,"~/Project/README.md"
+'7  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,55,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+'8  37  1  ~/Honours/Testing/Logical Foundations/Logic.idr
+|4,56,37,1,1543268990,"~/Honours/Testing/Logical Foundations/Logic.idr"
+'9  6  14  ~/.vimrc
+|4,57,6,14,1543268303,"~/.vimrc"
 
 # Jumplist (newest first):
--'  6  14  ~/.vimrc
-|4,39,6,14,1543268303,"~/.vimrc"
--'  1  0  ~/.vimrc
-|4,39,1,0,1543268283,"~/.vimrc"
--'  1  65  ~/.vimrc
-|4,39,1,65,1543209685,"~/.vimrc"
--'  1  70  ~/.vimrc
-|4,39,1,70,1543209569,"~/.vimrc"
+-'  1  0  ~/.bashrc
+|4,39,1,0,1543292039,"~/.bashrc"
+-'  14  0  ~/Project/Test.idr
+|4,39,14,0,1543271482,"~/Project/Test.idr"
+-'  14  0  ~/Project/Test.idr
+|4,39,14,0,1543271482,"~/Project/Test.idr"
+-'  1  0  ~/Project/Test.idr
+|4,39,1,0,1543271093,"~/Project/Test.idr"
+-'  1  0  ~/Project/Test.idr
+|4,39,1,0,1543271093,"~/Project/Test.idr"
+-'  144  10  ~/.vim/bundle/idris-vim/indent/idris.vim
+|4,39,144,10,1543271069,"~/.vim/bundle/idris-vim/indent/idris.vim"
+-'  144  10  ~/.vim/bundle/idris-vim/indent/idris.vim
+|4,39,144,10,1543271069,"~/.vim/bundle/idris-vim/indent/idris.vim"
+-'  144  10  ~/.vim/bundle/idris-vim/indent/idris.vim
+|4,39,144,10,1543271069,"~/.vim/bundle/idris-vim/indent/idris.vim"
+-'  144  10  ~/.vim/bundle/idris-vim/indent/idris.vim
+|4,39,144,10,1543271069,"~/.vim/bundle/idris-vim/indent/idris.vim"
+-'  1  0  ~/.vim/bundle/idris-vim/indent/idris.vim
+|4,39,1,0,1543271039,"~/.vim/bundle/idris-vim/indent/idris.vim"
+-'  1  0  ~/.vim/bundle/idris-vim/indent/idris.vim
+|4,39,1,0,1543271039,"~/.vim/bundle/idris-vim/indent/idris.vim"
+-'  1  0  ~/.vim/bundle/idris-vim/indent/idris.vim
+|4,39,1,0,1543271039,"~/.vim/bundle/idris-vim/indent/idris.vim"
+-'  1  0  ~/.vim/bundle/idris-vim/indent/idris.vim
+|4,39,1,0,1543271039,"~/.vim/bundle/idris-vim/indent/idris.vim"
+-'  8  0  ~/.vim/bundle
+|4,39,8,0,1543271034,"~/.vim/bundle"
+-'  8  0  ~/.vim/bundle
+|4,39,8,0,1543271034,"~/.vim/bundle"
+-'  8  0  ~/.vim/bundle
+|4,39,8,0,1543271034,"~/.vim/bundle"
+-'  8  0  ~/.vim/bundle
+|4,39,8,0,1543271034,"~/.vim/bundle"
+-'  8  0  ~/.vim/bundle
+|4,39,8,0,1543271034,"~/.vim/bundle"
+-'  8  0  ~/.vim/bundle
+|4,39,8,0,1543271034,"~/.vim/bundle"
+-'  8  0  ~/.vim/bundle
+|4,39,8,0,1543271034,"~/.vim/bundle"
+-'  8  0  ~/.vim/bundle
+|4,39,8,0,1543271034,"~/.vim/bundle"
+-'  3  8  ~/Project/Test.idr
+|4,39,3,8,1543271027,"~/Project/Test.idr"
+-'  5  8  ~/Project/Test.idr
+|4,39,5,8,1543271027,"~/Project/Test.idr"
+-'  5  8  ~/Project/Test.idr
+|4,39,5,8,1543271027,"~/Project/Test.idr"
+-'  5  8  ~/Project/Test.idr
+|4,39,5,8,1543271027,"~/Project/Test.idr"
+-'  5  8  ~/Project/Test.idr
+|4,39,5,8,1543271027,"~/Project/Test.idr"
+-'  3  8  ~/Project/Test.idr
+|4,39,3,8,1543271027,"~/Project/Test.idr"
+-'  5  8  ~/Project/Test.idr
+|4,39,5,8,1543271027,"~/Project/Test.idr"
+-'  5  8  ~/Project/Test.idr
+|4,39,5,8,1543271027,"~/Project/Test.idr"
+-'  5  8  ~/Project/Test.idr
+|4,39,5,8,1543271027,"~/Project/Test.idr"
+-'  5  8  ~/Project/Test.idr
+|4,39,5,8,1543271027,"~/Project/Test.idr"
+-'  1  0  ~/Project/Test.idr
+|4,39,1,0,1543270602,"~/Project/Test.idr"
+-'  1  0  ~/Project/Test.idr
+|4,39,1,0,1543270602,"~/Project/Test.idr"
+-'  1  0  ~/Project/Test.idr
+|4,39,1,0,1543270602,"~/Project/Test.idr"
+-'  1  0  ~/Project/Test.idr
+|4,39,1,0,1543270602,"~/Project/Test.idr"
+-'  1  0  ~/Project/Test.idr
+|4,39,1,0,1543270602,"~/Project/Test.idr"
+-'  1  0  ~/Project/Test.idr
+|4,39,1,0,1543270602,"~/Project/Test.idr"
+-'  1  0  ~/Project/Test.idr
+|4,39,1,0,1543270602,"~/Project/Test.idr"
+-'  1  0  ~/Project/Test.idr
+|4,39,1,0,1543270602,"~/Project/Test.idr"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  1  4  ~/Project/README.md
+|4,39,1,4,1543270493,"~/Project/README.md"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
+-'  34  0  ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+|4,39,34,0,1543269142,"~/Honours/Testing/Logical Foundations/Basics/Intro.idr"
 
 # History of marks within files (newest to oldest):
+
+> ~/.bashrc
+	*	1543292033	0
+	"	1	0
+
+> ~/Project/Test.idr
+	*	1543271481	0
+	"	14	0
+	^	14	0
+	.	13	0
+	+	2	0
+	+	2	15
+	+	3	6
+	+	3	5
+	+	3	0
+	+	2	16
+	+	4	0
+	+	13	0
+
+> ~/.vim/bundle/idris-vim/indent/idris.vim
+	*	1543271069	0
+	"	144	10
+	^	144	11
+	.	53	26
+	+	22	26
+	+	29	28
+	+	35	27
+	+	41	31
+	+	47	29
+	+	53	26
+
+> ~/Project/README.md
+	*	1543270493	0
+	"	1	4
+	^	1	5
+	.	1	4
+	+	1	4
+
+> ~/Honours/Testing/Logical Foundations/Basics/Intro.idr
+	*	1543269142	0
+	"	34	0
+	^	34	0
+
+> ~/Honours/Testing/Logical Foundations/Logic.idr
+	*	1543268990	0
+	"	37	1
+	^	37	2
 
 > ~/.vimrc
 	*	1543268302	0
