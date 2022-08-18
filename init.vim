@@ -1,32 +1,53 @@
-
 call plug#begin('~/.vim/plugged')
   Plug 'neovim/nvim-lspconfig'
   Plug 'edwinb/idris2-vim'
-  Plug 'whonore/Coqtail'
-  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 'markdown' }
+  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+  Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh'
+    \ }
 call plug#end()
 
 filetype indent off
+:set number
+:set expandtab
 
-let mapleader = '\'
-set number
-set expandtab
+" ---------------------------------- DIGRAPHS --------------------------------
 
+:digr ^# 9839 "♯
+:digr ^b 9837 "♭
+:digr EN 8866   "⊢
+:digr UU 120036 "𝓤
+:digr JJ 120025 "𝓙
+:digr BB 120121 "𝔹
+:digr .W 9702   "◦
+"digr .M        "·
+:digr >> 10230  "⟶
+"digr -!        "↑
+"digr -v        "↓
+:digr =v 8659 "⇓
+:digr NN 8469 "ℕ
+:digr ZZ 8484 "ℤ
+:digr ** 9734 "☆
+:digr ox 8855 "⊗
+:digr iI 120336 "𝘐
+:digr EQ 8801 "≡
+:digr -~ 8771 "≃
+:digr =~ 8773 "≅
 
-"---------------------- digraphs -------------------
+" ------------------------------------- HASKELL LSP ----------------------
+set rtp+=~/.vim/pack/XXX/start/LanguageClient-neovim
+let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server-wrapper', '--lsp'] }
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+let g:haskell_classic_highlighting = 1
 
-digr NN 8469 "ℕ
-digr UU 120036 "𝓤
-digr TT 8868 "⊤
-"digr -T gives ⊥
-digr EN 8866 "⊢
-"digr .M gives ·
-digr _a 8336 "subscript a
-"digr *X gives ×
-digr .W 9702 "◦
-
-"-------------------------IDRIS2 LSP CONFIG----------------------------------
-
+" ---------------------------- IDRIS2 LSP CONFIG -----------------------------
 lua << EOF
 local lspconfig = require('lspconfig')
 -- Flag to enable semantic highlightning on start, if false you have to issue a first command manually
@@ -40,50 +61,61 @@ lspconfig.idris2_lsp.setup {
       vim.lsp.buf_request(0, 'textDocument/semanticTokens/full',
         {textDocument = vim.lsp.util.make_text_document_params()}, nil)
     end
-    -- Example of how to request a single kind of code action with a keymap,
-    -- refer to the table in the README for the appropriate key for each command.
+    -- KEY MAPS
     vim.cmd [[nnoremap <Leader>c <Cmd>lua vim.lsp.buf.code_action({diagnostics={},only={"refactor.rewrite.CaseSplit"}})<CR>]]
     vim.cmd [[nnoremap <Leader>d <Cmd>lua vim.lsp.buf.code_action({diagnostics={},only={"refactor.rewrite.AddClause"}})<CR>]]
     vim.cmd [[nnoremap <Leader>p <Cmd>lua vim.lsp.buf.code_action({diagnostics={},only={"refactor.rewrite.ExprSearch"}})<CR>]]
     vim.cmd [[nnoremap <Leader>t <Cmd>lua vim.lsp.buf.hover()<CR>]]
     vim.cmd [[nnoremap <Leader>g <Cmd>lua vim.lsp.buf.definition()<CR>]]
-    vim.cmd [[nnoremap <Leader>e <Cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>]]
-
+    vim.cmd [[nnoremap <Leader>e <Cmd>lua vim.diagnostic.open_float()<CR>]]
+    -- replace show_line_diagnostics() with 
+    -- vim.lsp.diagnostics.open_float()
+    -- if things stop working
     --custom_attach(client) -- remove this line if you don't have a customized attach function
   end,
   autostart = true,
+  flags = { debounce_text_changes = 150 },
+  -- HANDLERS
   handlers = {
-    ['workspace/semanticTokens/refresh'] = function(err,  params, ctx, config)
+    ['workspace/semanticTokens/refresh'] = function(err, result, context, config)
       if autostart_semantic_highlightning then
         vim.lsp.buf_request(0, 'textDocument/semanticTokens/full',
           { textDocument = vim.lsp.util.make_text_document_params() }, nil)
       end
       return vim.NIL
     end,
-    ['textDocument/semanticTokens/full'] = function(err,  result, ctx, config)
-      -- temporary handler until native support lands
-      local bufnr = ctx.bufnr
-      local client = vim.lsp.get_client_by_id(ctx.client_id)
-      local legend = client.server_capabilities.semanticTokensProvider.legend
-      local token_types = legend.tokenTypes
-      local data = result.data
+    ['textDocument/semanticTokens/full'] = function(error, result, context, config)
+        -- Temporary handler until native support lands
+        -- <https://github.com/idris-community/idris2-lsp/wiki/Editor-specific-configuration#neovim-05-builtin-lsp>
+        local client_id = context.client_id
+        local bufnr = context.bufnr
+        local data = result.data
 
-      local ns = vim.api.nvim_create_namespace('nvim-lsp-semantic')
-      vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
-      local tokens = {}
-      local prev_line, prev_start = nil, 0
-      for i = 1, #data, 5 do
-        local delta_line = data[i]
-        prev_line = prev_line and prev_line + delta_line or delta_line
-        local delta_start = data[i + 1]
-        prev_start = delta_line == 0 and prev_start + delta_start or delta_start
-        local token_type = token_types[data[i + 3] + 1]
-        local line = vim.api.nvim_buf_get_lines(bufnr, prev_line, prev_line + 1, false)[1]
-        local byte_start = vim.str_byteindex(line, prev_start)
-        local byte_end = vim.str_byteindex(line, prev_start + data[i + 2])
-        vim.api.nvim_buf_add_highlight(bufnr, ns, 'LspSemantic_' .. token_type, prev_line, byte_start, byte_end)
-      end
-    end
+        local client = vim.lsp.get_client_by_id(client_id)
+        local legend = client.server_capabilities.semanticTokensProvider.legend
+        local token_types = legend.tokenTypes
+
+        local ns = vim.api.nvim_create_namespace('nvim-lsp-semantic')
+        vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
+
+        local prev_line, prev_start = nil, 0
+        for i = 1, #data, 5 do
+          local delta_line = data[i]
+          prev_line = prev_line and prev_line + delta_line or delta_line
+          local delta_start = data[i + 1]
+          prev_start = delta_line == 0 and prev_start + delta_start or delta_start
+
+          local line = vim.api.nvim_buf_get_lines(bufnr, prev_line, prev_line + 1, false)[1]
+          local byte_start = vim.str_byteindex(line, prev_start)
+          local byte_end = vim.str_byteindex(line, prev_start + data[i + 2])
+
+          local token_type = token_types[data[i + 3] + 1]
+          local highlight_group = 'LspSemantic_' .. token_type
+
+          vim.api.nvim_buf_add_highlight(bufnr, ns, highlight_group, prev_line, byte_start, byte_end)
+          -- vim.cmd(string.format([[echom '%s %s %s %s %s']], ns, highlight_group, prev_line, byte_start, byte_end))
+        end
+      end,
   },
 }
 
