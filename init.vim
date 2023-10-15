@@ -1,18 +1,17 @@
 call plug#begin('~/.vim/plugged')
   Plug 'neovim/nvim-lspconfig'
   Plug 'edwinb/idris2-vim'
-  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-  Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh'
-    \ }
 call plug#end()
 
 filetype indent off
+:set wrap
 :set number
 :set expandtab
+:set clipboard+=unnamedplus
+:set textwidth=61
 
-" ---------------------------------- DIGRAPHS --------------------------------
+
+" ------------------------- DIGRAPHS -----------------------
 
 :digr ^# 9839 "♯
 :digr ^b 9837 "♭
@@ -33,24 +32,36 @@ filetype indent off
 :digr iI 120336 "𝘐
 :digr EQ 8801 "≡
 :digr -~ 8771 "≃
+:digr ~> 8669 "⇝
 :digr =~ 8773 "≅
+:digr TT 8868 "⊤
+:digr Tt 120035 "𝓣 
+:digr RR 119929 "𝑹
 
-" ------------------------------------- HASKELL LSP ----------------------
+" ------------------------ HASKELL LSP -----------------------
 set rtp+=~/.vim/pack/XXX/start/LanguageClient-neovim
-let g:LanguageClient_serverCommands = { 'haskell': ['haskell-language-server-wrapper', '--lsp'] }
-let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
-let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
-let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
-let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
-let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
-let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+let g:LanguageClient_serverCommands = {'haskell': ['haskell-language-server-wrapper' , '--lsp']}
+let g:haskell_enable_quantification = 1   
+  " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      
+  " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      
+  " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 
+  " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        
+  " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  
+  " to enable highlighting of `static`
+let g:haskell_backpack = 1                
+  " to enable highlighting of backpack keywords
 let g:haskell_classic_highlighting = 1
 
-" ---------------------------- IDRIS2 LSP CONFIG -----------------------------
+" ------------------ IDRIS2 LSP CONFIG -----------------------
 lua << EOF
 local lspconfig = require('lspconfig')
--- Flag to enable semantic highlightning on start, if false you have to issue a first command manually
+-- Flag to enable semantic highlightning on start, 
+-- if false you have to issue a first command manually
 local autostart_semantic_highlightning = true
 lspconfig.idris2_lsp.setup {
   on_new_config = function(new_config, new_root_dir)
@@ -67,6 +78,7 @@ lspconfig.idris2_lsp.setup {
     vim.cmd [[nnoremap <Leader>p <Cmd>lua vim.lsp.buf.code_action({diagnostics={},only={"refactor.rewrite.ExprSearch"}})<CR>]]
     vim.cmd [[nnoremap <Leader>t <Cmd>lua vim.lsp.buf.hover()<CR>]]
     vim.cmd [[nnoremap <Leader>g <Cmd>lua vim.lsp.buf.definition()<CR>]]
+    -- vim.cmd [[nnoremap <Leader>e <Cmd>lua vim.lsp.show_line_diagnostic()<CR>]]
     vim.cmd [[nnoremap <Leader>e <Cmd>lua vim.diagnostic.open_float()<CR>]]
     -- replace show_line_diagnostics() with 
     -- vim.lsp.diagnostics.open_float()
@@ -114,6 +126,7 @@ lspconfig.idris2_lsp.setup {
 
           vim.api.nvim_buf_add_highlight(bufnr, ns, highlight_group, prev_line, byte_start, byte_end)
           -- vim.cmd(string.format([[echom '%s %s %s %s %s']], ns, highlight_group, prev_line, byte_start, byte_end))
+
         end
       end,
   },
@@ -129,6 +142,22 @@ vim.cmd [[highlight link LspSemantic_namespace Identifier]] -- Explicit namespac
 vim.cmd [[highlight link LspSemantic_postulate Define]] -- Postulates
 vim.cmd [[highlight link LspSemantic_module Identifier]] -- Module identifiers
 
+local set_hl_for_floating_window = function()
+  vim.api.nvim_set_hl(0, 'NormalFloat', {
+    link = 'Normal',
+  })
+  vim.api.nvim_set_hl(0, 'FloatBorder', {
+    bg = 'none',
+  })
+end
+
+set_hl_for_floating_window()
+
+vim.api.nvim_create_autocmd('ColorScheme', {
+  pattern = '*',
+  desc = 'Avoid overwritten by loading color schemes later',
+  callback = set_hl_for_floating_window,
+})
 
 -- Add the following command to a mapping if you want to send a manual request for semantic highlight
 -- :lua vim.lsp.buf_request(0, 'textDocument/semanticTokens/full', {textDocument = vim.lsp.util.make_text_document_params()}, nil)
