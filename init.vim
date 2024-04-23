@@ -21,6 +21,8 @@ filetype indent off
 :digr BB 120121 "𝔹
 :digr .W 9702   "◦
 "digr .M        "·
+"digr PR        "▶
+"digr Tr        "▷
 :digr >> 10230  "⟶
 "digr -!        "↑
 "digr -v        "↓
