@@ -11,6 +11,7 @@ filetype indent off
 :set textwidth=115
 colorscheme donovan
 
+:hi Comment ctermfg=LightGrey gui=bold
 
 " ------------------------- DIGRAPHS -----------------------
 
@@ -22,12 +23,19 @@ colorscheme donovan
 :digr EN 8866   "⊢
 :digr UU 120036 "𝓤
 :digr JJ 120025 "𝓙
+:digr CC 120018 "𝓒 
 :digr BB 120121 "𝔹
 :digr .W 9702   "◦
+:digr CO 8728   "∘
 "digr .M        "·
+"digr Ob        "∘
+"digr Sb        "∙
 :digr >> 10230  "⟶
 "digr -!        "↑
 "digr -v        "↓
+"digr PR        "▶
+"digr Tr        "▷
+"digr fS        "■
 :digr =v 8659 "⇓
 :digr NN 8469 "ℕ
 :digr ZZ 8484 "ℤ
@@ -38,6 +46,7 @@ colorscheme donovan
 :digr -~ 8771 "≃
 :digr ~> 8669 "⇝
 :digr =~ 8773 "≅
+:digr =D 8796 "≜
 :digr TT 8868 "⊤
 :digr FF 8869 "⊥
 :digr TI 120035 "𝓣 
@@ -46,8 +55,14 @@ colorscheme donovan
 :digr NI 8713 "∉
 :digr UP 8593 "↑
 :digr DO 8595 "↓
+:digr OL 128275 "🔓 open lock
+:digr SL 128274 "🔒 shut lock
+:digr << 65378 "｢
+:digr >> 65379 "｣
+
 
 " ------------------------ HASKELL LSP -----------------------
+
 set rtp+=~/.vim/pack/XXX/start/LanguageClient-neovim
 let g:LanguageClient_serverCommands = {'haskell': ['haskell-language-server-wrapper' , '--lsp']}
 let g:haskell_enable_quantification = 1   
@@ -87,7 +102,7 @@ lspconfig.idris2_lsp.setup {
     vim.cmd [[nnoremap <Leader>p <Cmd>lua vim.lsp.buf.code_action({diagnostics={},only={"refactor.rewrite.ExprSearch"}})<CR>]]
     vim.cmd [[nnoremap <Leader>t <Cmd>lua vim.lsp.buf.hover()<CR>]]
     vim.cmd [[nnoremap <Leader>g <Cmd>lua vim.lsp.buf.definition()<CR>]]
-    -- vim.cmd [[nnoremap <Leader>e <Cmd>lua vim.lsp.show_line_diagnostic()<CR>]]
+--    vim.cmd [[nnoremap <Leader>e <Cmd>lua vim.lsp.show_line_diagnostic()<CR>]]
     vim.cmd [[nnoremap <Leader>e <Cmd>lua vim.diagnostic.open_float()<CR>]]
     -- replace show_line_diagnostics() with 
     -- vim.lsp.diagnostics.open_float()
@@ -156,7 +171,7 @@ local set_hl_for_floating_window = function()
     link = 'Normal',
   })
   vim.api.nvim_set_hl(0, 'FloatBorder', {
-    bg = 'none',
+    fg = "#FFFFFF",
   })
 end
 
