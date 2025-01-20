@@ -8,11 +8,15 @@ filetype indent off
 :set number
 :set expandtab
 :set clipboard+=unnamedplus
-:set textwidth=61
+:set textwidth=115
+colorscheme donovan
 
 
 " ------------------------- DIGRAPHS -----------------------
 
+":digr Sb "∙
+":digr Ob "∘
+":digr PR "▶
 :digr ^# 9839 "♯
 :digr ^b 9837 "♭
 :digr EN 8866   "⊢
@@ -21,8 +25,6 @@ filetype indent off
 :digr BB 120121 "𝔹
 :digr .W 9702   "◦
 "digr .M        "·
-"digr PR        "▶
-"digr Tr        "▷
 :digr >> 10230  "⟶
 "digr -!        "↑
 "digr -v        "↓
@@ -31,14 +33,19 @@ filetype indent off
 :digr ZZ 8484 "ℤ
 :digr ** 9734 "☆
 :digr ox 8855 "⊗
-:digr iI 120336 "𝘐
+:digr II 120336 "𝘐
 :digr EQ 8801 "≡
 :digr -~ 8771 "≃
 :digr ~> 8669 "⇝
 :digr =~ 8773 "≅
 :digr TT 8868 "⊤
-:digr Tt 120035 "𝓣 
+:digr FF 8869 "⊥
+:digr TI 120035 "𝓣 
 :digr RR 119929 "𝑹
+:digr IN 8712 "∈
+:digr NI 8713 "∉
+:digr UP 8593 "↑
+:digr DO 8595 "↓
 
 " ------------------------ HASKELL LSP -----------------------
 set rtp+=~/.vim/pack/XXX/start/LanguageClient-neovim
