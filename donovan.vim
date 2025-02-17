@@ -121,6 +121,17 @@ hi DiffDelete guifg=#ffffff guibg=#af5faf gui=NONE cterm=NONE
 
 " ########### EDIT THIS SECTION FOR PRACTICAL COLOUR CHANGES ###########################
 if s:t_Co >= 256
+  "231 = White
+  "226 = Yellow
+  "51 = Cyan
+  "152 = Dark Cyan
+  "214 = Orange
+  "254, 145 = Grey
+  "196 = Red
+  "29, 40, 65, 120 = Dark Green
+  "45 = Green
+  "201 = Magenta
+  "164 = Dark Magenta
   hi Normal ctermfg=231 ctermbg=16 cterm=NONE
   hi ColorColumn ctermfg=NONE ctermbg=160 cterm=NONE
   hi CursorColumn ctermfg=NONE ctermbg=59 cterm=NONE
@@ -135,16 +146,16 @@ if s:t_Co >= 256
   hi FoldColumn ctermfg=231 ctermbg=NONE cterm=NONE
   hi Folded ctermfg=NONE ctermbg=239 cterm=NONE
   hi IncSearch ctermfg=NONE ctermbg=67 cterm=NONE
-  hi LineNr ctermfg=226 ctermbg=NONE cterm=NONE
+  hi LineNr ctermfg=254 ctermbg=NONE cterm=NONE
   hi MatchParen ctermfg=NONE ctermbg=44 cterm=NONE
   hi ModeMsg ctermfg=NONE ctermbg=NONE cterm=NONE
-  hi MoreMsg ctermfg=29 ctermbg=NONE cterm=NONE
+  hi MoreMsg ctermfg=51 ctermbg=NONE cterm=NONE
   hi NonText ctermfg=226 ctermbg=236 cterm=NONE
   hi Pmenu ctermfg=231 ctermbg=238 cterm=NONE
   hi PmenuSbar ctermfg=NONE ctermbg=16 cterm=NONE
   hi PmenuSel ctermfg=16 ctermbg=44 cterm=NONE
   hi PmenuThumb ctermfg=NONE ctermbg=254 cterm=NONE
-  hi Question ctermfg=231 ctermbg=16 cterm=NONE
+  hi Question ctermfg=226 ctermbg=16 cterm=NONE
   hi Search ctermfg=16 ctermbg=145 cterm=NONE
   hi SignColumn ctermfg=231 ctermbg=NONE cterm=NONE
   hi SpecialKey ctermfg=231 ctermbg=NONE cterm=NONE
@@ -163,19 +174,19 @@ if s:t_Co >= 256
   hi SpellBad ctermfg=196 ctermbg=NONE cterm=underline
   hi SpellCap ctermfg=46 ctermbg=NONE cterm=underline
   hi SpellLocal ctermfg=226 ctermbg=NONE cterm=underline
-  hi SpellRare ctermfg=214 ctermbg=NONE cterm=underline
+  hi SpellRare ctermfg=227 ctermbg=NONE cterm=underline
   hi Comment ctermfg=248 ctermbg=NONE cterm=NONE
   hi Constant ctermfg=46 ctermbg=NONE cterm=NONE
   hi Error ctermfg=196 ctermbg=231 cterm=reverse
-  hi Identifier ctermfg=201 ctermbg=NONE cterm=NONE
+  hi Identifier ctermfg=51 ctermbg=NONE cterm=NONE
   hi Ignore ctermfg=16 ctermbg=16 cterm=NONE
-  hi Label ctermfg=220 ctermbg=NONE cterm=NONE
+  hi Label ctermfg=46 ctermbg=NONE cterm=NONE
   hi Operator ctermfg=214 ctermbg=NONE cterm=NONE
   hi PreProc ctermfg=231 ctermbg=NONE cterm=NONE
   hi Special ctermfg=226 ctermbg=NONE cterm=NONE
   hi Statement ctermfg=152 ctermbg=NONE cterm=NONE
   hi Todo ctermfg=16 ctermbg=214 cterm=NONE
-  hi Type ctermfg=214 ctermbg=NONE cterm=NONE
+  hi Type ctermfg=226 ctermbg=NONE cterm=NONE
   hi Underlined ctermfg=111 ctermbg=NONE cterm=underline
   hi CursorIM ctermfg=NONE ctermbg=fg cterm=NONE
   hi ToolbarLine ctermfg=NONE ctermbg=NONE cterm=NONE
@@ -370,7 +381,7 @@ if s:t_Co >= 0
   hi WarningMsg term=standout
   hi WildMenu term=bold
   hi CursorIM term=NONE
-  hi ToolbarLine term=reverse
+  hi ToolbarLine :term=reverse
   hi ToolbarButton term=bold,reverse
   hi CurSearch term=reverse
   hi CursorLineFold term=underline
