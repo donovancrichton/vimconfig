@@ -7,12 +7,9 @@ filetype indent off
 :set wrap
 :set number
 :set expandtab
-:set clipboard+=unnamedplus
+:set clipboard=unnamedplus
 :set textwidth=115
 colorscheme donovan
-
-:hi Comment ctermfg=LightGrey gui=bold
-
 " ------------------------- DIGRAPHS -----------------------
 
 ":digr Sb "∙
@@ -160,7 +157,7 @@ lspconfig.idris2_lsp.setup {
 vim.cmd [[highlight link LspSemantic_type Include]]   -- Type constructors
 vim.cmd [[highlight link LspSemantic_function Identifier]] -- Functions names
 vim.cmd [[highlight link LspSemantic_enumMember Number]]   -- Data constructors
-vim.cmd [[highlight LspSemantic_variable guifg=gray]] -- Bound variables
+vim.cmd [[highlight link LspSemantic_variable Special]] -- Bound variables
 vim.cmd [[highlight link LspSemantic_keyword Structure]]  -- Keywords
 vim.cmd [[highlight link LspSemantic_namespace Identifier]] -- Explicit namespaces
 vim.cmd [[highlight link LspSemantic_postulate Define]] -- Postulates
