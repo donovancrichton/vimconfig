@@ -1,15 +1,15 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/plugged')
   Plug 'neovim/nvim-lspconfig'
-  Plug 'edwinb/idris2-vim'
 call plug#end()
 
 filetype indent off
-:set wrap
+:set wrap                                                           
 :set number
 :set expandtab
+:set textwidth=160
 :set clipboard=unnamedplus
-:set textwidth=115
 colorscheme donovan
+
 " ------------------------- DIGRAPHS -----------------------
 
 ":digr Sb "∙
@@ -57,33 +57,13 @@ colorscheme donovan
 :digr << 65378 "｢
 :digr >> 65379 "｣
 
-
-" ------------------------ HASKELL LSP -----------------------
-
-set rtp+=~/.vim/pack/XXX/start/LanguageClient-neovim
-let g:LanguageClient_serverCommands = {'haskell': ['haskell-language-server-wrapper' , '--lsp']}
-let g:haskell_enable_quantification = 1   
-  " to enable highlighting of `forall`
-let g:haskell_enable_recursivedo = 1      
-  " to enable highlighting of `mdo` and `rec`
-let g:haskell_enable_arrowsyntax = 1      
-  " to enable highlighting of `proc`
-let g:haskell_enable_pattern_synonyms = 1 
-  " to enable highlighting of `pattern`
-let g:haskell_enable_typeroles = 1        
-  " to enable highlighting of type roles
-let g:haskell_enable_static_pointers = 1  
-  " to enable highlighting of `static`
-let g:haskell_backpack = 1                
-  " to enable highlighting of backpack keywords
-let g:haskell_classic_highlighting = 1
-
 " ------------------ IDRIS2 LSP CONFIG -----------------------
 lua << EOF
 local lspconfig = require('lspconfig')
 -- Flag to enable semantic highlightning on start, 
 -- if false you have to issue a first command manually
 local autostart_semantic_highlightning = true
+-- setup
 lspconfig.idris2_lsp.setup {
   on_new_config = function(new_config, new_root_dir)
     new_config.capabilities['workspace']['semanticTokens'] = {refreshSupport = true}
@@ -154,14 +134,22 @@ lspconfig.idris2_lsp.setup {
 }
 
 -- Set here your preferred colors for semantic values
-vim.cmd [[highlight link LspSemantic_type Include]]   -- Type constructors
-vim.cmd [[highlight link LspSemantic_function Identifier]] -- Functions names
-vim.cmd [[highlight link LspSemantic_enumMember Number]]   -- Data constructors
-vim.cmd [[highlight link LspSemantic_variable Special]] -- Bound variables
-vim.cmd [[highlight link LspSemantic_keyword Structure]]  -- Keywords
-vim.cmd [[highlight link LspSemantic_namespace Identifier]] -- Explicit namespaces
-vim.cmd [[highlight link LspSemantic_postulate Define]] -- Postulates
-vim.cmd [[highlight link LspSemantic_module Identifier]] -- Module identifiers
+-- Types
+vim.cmd [[highlight link LspSemantic_type Type]]
+-- Function Names
+vim.cmd [[highlight link LspSemantic_function Identifier]]
+-- Data Constuctors
+vim.cmd [[highlight link LspSemantic_enumMember Constant]]
+-- Bound Variables
+vim.cmd [[highlight LspSemantic_variable guifg=orange]]
+-- Keywords
+vim.cmd [[highlight link LspSemantic_keyword Statement]]
+-- Explicit Namespace
+vim.cmd [[highlight link LspSemantic_namespace Identifier]]
+-- Postulates
+vim.cmd [[highlight link LspSemantic_postulate Define]]
+-- Module Identifiers
+vim.cmd [[highlight link LspSemantic_module PreProc]]
 
 local set_hl_for_floating_window = function()
   vim.api.nvim_set_hl(0, 'NormalFloat', {
@@ -183,3 +171,6 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 -- Add the following command to a mapping if you want to send a manual request for semantic highlight
 -- :lua vim.lsp.buf_request(0, 'textDocument/semanticTokens/full', {textDocument = vim.lsp.util.make_text_document_params()}, nil)
 EOF
+
+
+
