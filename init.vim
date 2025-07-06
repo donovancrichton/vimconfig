@@ -38,6 +38,7 @@ colorscheme donovan
 :digr ZZ 8484 "ℤ
 :digr ** 9734 "☆
 :digr ox 8855 "⊗
+:digr o+ 8853 "⊕
 :digr II 120336 "𝘐
 :digr EQ 8801 "≡
 :digr -~ 8771 "≃
@@ -50,6 +51,8 @@ colorscheme donovan
 :digr RR 119929 "𝑹
 :digr IN 8712 "∈
 :digr NI 8713 "∉
+:digr SU 8746 "∪
+:digr SI 8745 "∩
 :digr UP 8593 "↑
 :digr DO 8595 "↓
 :digr OL 128275 "🔓 open lock
