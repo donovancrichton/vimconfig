@@ -53,12 +53,19 @@ colorscheme donovan
 :digr NI 8713 "∉
 :digr SU 8746 "∪
 :digr SI 8745 "∩
+":digr (C 8834 "⊂
+":digr )C 8835 "⊃
+":digr (_ 8838 "⊆
+":digr )_ 8839 "⊇
+"
 :digr UP 8593 "↑
 :digr DO 8595 "↓
 :digr OL 128275 "🔓 open lock
 :digr SL 128274 "🔒 shut lock
 :digr << 65378 "｢
 :digr >> 65379 "｣
+
+
 
 " ------------------ IDRIS2 LSP CONFIG -----------------------
 lua << EOF
