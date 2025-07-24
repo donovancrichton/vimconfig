@@ -15,6 +15,7 @@ colorscheme donovan
 ":digr Sb "∙
 ":digr Ob "∘
 ":digr PR "▶
+:digr -- 8211 "–
 :digr ^# 9839 "♯
 :digr ^b 9837 "♭
 :digr EN 8866   "⊢
