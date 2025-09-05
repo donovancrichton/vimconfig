@@ -23,6 +23,7 @@ colorscheme donovan
 :digr JJ 120025 "𝓙
 :digr CC 120018 "𝓒 
 :digr BB 120121 "𝔹
+:digr RR 8477   "ℝ
 :digr .W 9702   "◦
 :digr CO 8728   "∘
 "digr .M        "·
@@ -49,7 +50,6 @@ colorscheme donovan
 :digr TT 8868 "⊤
 :digr FF 8869 "⊥
 :digr TI 120035 "𝓣 
-:digr RR 119929 "𝑹
 :digr IN 8712 "∈
 :digr NI 8713 "∉
 :digr SU 8746 "∪
@@ -59,8 +59,13 @@ colorscheme donovan
 ":digr (_ 8838 "⊆
 ":digr )_ 8839 "⊇
 "
+:digr TO 8164 "↦
 :digr UP 8593 "↑
 :digr DO 8595 "↓
+:digr SE 8600 "↘
+:digr SW 8601 "↙ 
+:digr NW 8598 "↖
+:digr NE 8599 "↗
 :digr OL 128275 "🔓 open lock
 :digr SL 128274 "🔒 shut lock
 :digr << 65378 "｢
