@@ -59,7 +59,7 @@ colorscheme donovan
 ":digr (_ 8838 "⊆
 ":digr )_ 8839 "⊇
 "
-:digr TO 8164 "↦
+:digr TO 8614 "↦
 :digr UP 8593 "↑
 :digr DO 8595 "↓
 :digr SE 8600 "↘
