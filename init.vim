@@ -57,7 +57,7 @@ colorscheme donovan
 ":digr (C 8834 "⊂
 ":digr )C 8835 "⊃
 ":digr (_ 8838 "⊆
-":digr )_ 8839 "⊇
+"t:digr )_ 8839 "⊇
 "
 :digr TO 8614 "↦
 :digr UP 8593 "↑
@@ -68,8 +68,13 @@ colorscheme donovan
 :digr NE 8599 "↗
 :digr OL 128275 "🔓 open lock
 :digr SL 128274 "🔒 shut lock
-:digr << 65378 "｢
-:digr >> 65379 "｣
+:digr << 10092 "❬
+:digr >> 10093 "❭
+:digr (( 10098 "❲
+:digr )) 10099 "❳
+:digr [] 10072 "❘
+:digr [[ 10635 "⦋
+:digr ]] 10636 "⦌
 
 
 
