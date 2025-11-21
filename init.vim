@@ -45,7 +45,8 @@ colorscheme donovan
 :digr EQ 8801 "≡
 :digr -~ 8771 "≃
 :digr ~> 8669 "⇝
-:digr =~ 8773 "≅
+:digr ~~ 8776 "≈
+
 :digr =D 8796 "≜
 :digr TT 8868 "⊤
 :digr FF 8869 "⊥
