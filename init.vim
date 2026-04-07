@@ -210,7 +210,7 @@ vim.api.nvim_create_user_command('Dictate', function()
     
     -- Run the script and capture the output
     -- 'trim' ensures we don't get unwanted trailing newlines
-    local output = vim.fn.trim(vim.fn.system('~/bin/vim-dictate'))
+    local output = vim.fn.trim(vim.fn.system('vim-dictate'))
     
     -- If the script returned text, insert it at the cursor
     if output ~= "" then
