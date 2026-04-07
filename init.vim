@@ -1,5 +1,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
   Plug 'neovim/nvim-lspconfig'
+  Plug 'Avi-D-coder/whisper.nvim'
 call plug#end()
 
 filetype indent off
@@ -193,8 +194,30 @@ vim.api.nvim_create_autocmd('ColorScheme', {
   callback = set_hl_for_floating_window,
 })
 
--- Add the following command to a mapping if you want to send a manual request for semantic highlight
--- :lua vim.lsp.buf_request(0, 'textDocument/semanticTokens/full', {textDocument = vim.lsp.util.make_text_document_params()}, nil)
+require('whisper').setup({
+    -- Point to the tool you built in Part 1
+    binary_path = vim.fn.expand("~") .. "/whisper.cpp/main",
+    model_path = vim.fn.expand("~") .. "/whisper.cpp/models/ggml-base.en.bin",
+    -- The key to Start/Stop recording
+    keybind = "<C-g>"
+})
+
+
+-- Set up dictate command for whisper dictation
+vim.api.nvim_create_user_command('Dictate', function()
+    -- Get the current cursor position
+    local line = vim.api.nvim_win_get_cursor(0)[1]
+    
+    -- Run the script and capture the output
+    -- 'trim' ensures we don't get unwanted trailing newlines
+    local output = vim.fn.trim(vim.fn.system('~/bin/vim-dictate'))
+    
+    -- If the script returned text, insert it at the cursor
+    if output ~= "" then
+        vim.api.nvim_put({output}, 'c', true, true)
+    end
+end, { desc = 'Start speech-to-text transcription via Whisper' })
+
 EOF
 
 
