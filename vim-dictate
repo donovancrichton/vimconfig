@@ -1,0 +1,35 @@
+#!/bin/bash
+
+MODEL_PATH="$HOME/SW/whisper.cpp/models/ggml-base.en.bin"
+WHISPER_EXE="$HOME/SW/whisper.cpp/build/bin/whisper-cli"
+HW_ID="hw:1,0"
+TEMP_AUDIO="/tmp/vim_voice.wav"
+RESULT_FILE="/tmp/vim_dictate_out.txt"
+
+# The DTT and AU Spelling Prompt
+# Notice: No single quotes, commas, or special characters that might break Bash parsing.
+THESIS_PROMPT="This is a formal Australian academic thesis on dependent type theory using terms like Martin-Lof formalisation 
+               behaviour and parametrisation. Look out for specific terms like induction-induction or inductive-inductive."
+
+# Clear old results
+> "$RESULT_FILE"
+
+# 1. Record
+echo "--- DICTATING DTT THESIS (Press ANY KEY to stop) ---" >&2
+arecord -D "$HW_ID" -f S16_LE -r 16000 "$TEMP_AUDIO" > /dev/null 2>&1 &
+RECORD_PID=$!
+
+# 2. Wait for keypress
+read -n 1 -s
+kill $RECORD_PID
+wait $RECORD_PID 2>/dev/null
+
+echo "Transcribing..." >&2
+
+# 3. Transcribe with the prompt and save
+# We trim leading/trailing whitespace so it drops perfectly at your cursor
+"$WHISPER_EXE" -m "$MODEL_PATH" -f "$TEMP_AUDIO" -nt --prompt "$THESIS_PROMPT" 2>/dev/null | sed 's/^[[:space:]]*//; s/[[:space:]]*$//' > "$RESULT_FILE"
+
+# Force save to disk and clean up
+sync "$RESULT_FILE"
+rm -f "$TEMP_AUDIO"

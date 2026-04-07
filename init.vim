@@ -205,19 +205,57 @@ require('whisper').setup({
 
 -- Set up dictate command for whisper dictation
 vim.api.nvim_create_user_command('Dictate', function()
-    -- Get the current cursor position
-    local line = vim.api.nvim_win_get_cursor(0)[1]
+    local bufnr = vim.api.nvim_get_current_buf()
     
-    -- Run the script and capture the output
-    -- 'trim' ensures we don't get unwanted trailing newlines
-    local output = vim.fn.trim(vim.fn.system('vim-dictate'))
-    
-    -- If the script returned text, insert it at the cursor
-    if output ~= "" then
-        vim.api.nvim_put({output}, 'c', true, true)
-    end
-end, { desc = 'Start speech-to-text transcription via Whisper' })
+    -- Create the floating window
+    local width = 50
+    local height = 3
+    local opts = {
+        relative = 'editor',
+        width = width,
+        height = height,
+        col = (vim.o.columns - width) / 2,
+        row = (vim.o.lines - height) / 2,
+        style = 'minimal',
+        border = 'rounded'
+    }
 
+    local win_buf = vim.api.nvim_create_buf(false, true)
+    local win = vim.api.nvim_open_win(win_buf, true, opts)
+
+    -- Use jobstart inside the terminal to track the exit properly
+    vim.fn.termopen('vim-dictate', {
+        on_exit = function()
+            -- Close window first to return focus to the main buffer
+            if vim.api.nvim_win_is_valid(win) then
+                vim.api.nvim_win_close(win, true)
+            end
+
+            -- Give the OS a split second to finish the file write
+            vim.defer_fn(function()
+                local f = io.open("/tmp/vim_dictate_out.txt", "r")
+                if f then
+                    local content = f:read("*all"):gsub("[\n\r]", "")
+                    f:close()
+                    
+                    if content ~= "" then
+                        -- Schedule the insertion to ensure we are back in the right buffer
+                        vim.schedule(function()
+                            -- 'p' puts it after cursor, 'c' follows current style
+                            vim.api.nvim_put({content}, 'c', true, true)
+                        end)
+                    else
+                        print("Whisper returned no text.")
+                    end
+                else
+                    print("Error: Could not open transcription file.")
+                end
+            end, 100) -- 100ms delay is the "4D Chess" safety margin
+        end
+    })
+
+    vim.cmd('startinsert')
+end, { desc = 'Dictate' })
 EOF
 
 
