@@ -85,178 +85,31 @@ colorscheme donovan
 
 " ------------------ IDRIS2 LSP CONFIG -----------------------
 lua << EOF
-local lspconfig = require('lspconfig')
--- Flag to enable semantic highlightning on start, 
--- if false you have to issue a first command manually
-local autostart_semantic_highlightning = true
--- setup
-lspconfig.idris2_lsp.setup {
-  on_new_config = function(new_config, new_root_dir)
-    new_config.capabilities['workspace']['semanticTokens'] = {refreshSupport = true}
-  end,
-  on_attach = function(client)
-    if autostart_semantic_highlightning then
-      vim.lsp.buf_request(0, 'textDocument/semanticTokens/full',
-        {textDocument = vim.lsp.util.make_text_document_params()}, nil)
-    end
+-- 1. Extend the default configuration for the Idris2 LSP
+vim.lsp.config('idris2_lsp', {
+  on_attach = function(client, bufnr)
+    -- Modern Neovim handles semantic tokens natively.
+    -- No custom capability hacks or handlers are required.
+
+    -- Define buffer-local options for keymaps
+    local opts = { noremap = true, silent = true, buffer = bufnr }
+
     -- KEY MAPS
-    vim.cmd [[nnoremap <Leader>c <Cmd>lua vim.lsp.buf.code_action({diagnostics={},only={"refactor.rewrite.CaseSplit"}})<CR>]]
-    vim.cmd [[nnoremap <Leader>d <Cmd>lua vim.lsp.buf.code_action({diagnostics={},only={"refactor.rewrite.AddClause"}})<CR>]]
-    vim.cmd [[nnoremap <Leader>p <Cmd>lua vim.lsp.buf.code_action({diagnostics={},only={"refactor.rewrite.ExprSearch"}})<CR>]]
-    vim.cmd [[nnoremap <Leader>t <Cmd>lua vim.lsp.buf.hover()<CR>]]
-    vim.cmd [[nnoremap <Leader>g <Cmd>lua vim.lsp.buf.definition()<CR>]]
---    vim.cmd [[nnoremap <Leader>e <Cmd>lua vim.lsp.show_line_diagnostic()<CR>]]
-    vim.cmd [[nnoremap <Leader>e <Cmd>lua vim.diagnostic.open_float()<CR>]]
-    -- replace show_line_diagnostics() with 
-    -- vim.lsp.diagnostics.open_float()
-    -- if things stop working
-    --custom_attach(client) -- remove this line if you don't have a customized attach function
-  end,
-  autostart = true,
-  flags = { debounce_text_changes = 150 },
-  -- HANDLERS
-  handlers = {
-    ['workspace/semanticTokens/refresh'] = function(err, result, context, config)
-      if autostart_semantic_highlightning then
-        vim.lsp.buf_request(0, 'textDocument/semanticTokens/full',
-          { textDocument = vim.lsp.util.make_text_document_params() }, nil)
-      end
-      return vim.NIL
-    end,
-    ['textDocument/semanticTokens/full'] = function(error, result, context, config)
-        -- Temporary handler until native support lands
-        -- <https://github.com/idris-community/idris2-lsp/wiki/Editor-specific-configuration#neovim-05-builtin-lsp>
-        local client_id = context.client_id
-        local bufnr = context.bufnr
-        local data = result.data
-
-        local client = vim.lsp.get_client_by_id(client_id)
-        local legend = client.server_capabilities.semanticTokensProvider.legend
-        local token_types = legend.tokenTypes
-
-        local ns = vim.api.nvim_create_namespace('nvim-lsp-semantic')
-        vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
-
-        local prev_line, prev_start = nil, 0
-        for i = 1, #data, 5 do
-          local delta_line = data[i]
-          prev_line = prev_line and prev_line + delta_line or delta_line
-          local delta_start = data[i + 1]
-          prev_start = delta_line == 0 and prev_start + delta_start or delta_start
-
-          local line = vim.api.nvim_buf_get_lines(bufnr, prev_line, prev_line + 1, false)[1]
-          local byte_start = vim.str_byteindex(line, prev_start)
-          local byte_end = vim.str_byteindex(line, prev_start + data[i + 2])
-
-          local token_type = token_types[data[i + 3] + 1]
-          local highlight_group = 'LspSemantic_' .. token_type
-
-          vim.api.nvim_buf_add_highlight(bufnr, ns, highlight_group, prev_line, byte_start, byte_end)
-          -- vim.cmd(string.format([[echom '%s %s %s %s %s']], ns, highlight_group, prev_line, byte_start, byte_end))
-
-        end
-      end,
-  },
-}
-
--- Set here your preferred colors for semantic values
--- Types
-vim.cmd [[highlight link LspSemantic_type Type]]
--- Function Names
-vim.cmd [[highlight link LspSemantic_function Identifier]]
--- Data Constuctors
-vim.cmd [[highlight link LspSemantic_enumMember Constant]]
--- Bound Variables
-vim.cmd [[highlight LspSemantic_variable guifg=orange]]
--- Keywords
-vim.cmd [[highlight link LspSemantic_keyword Statement]]
--- Explicit Namespace
-vim.cmd [[highlight link LspSemantic_namespace Identifier]]
--- Postulates
-vim.cmd [[highlight link LspSemantic_postulate Define]]
--- Module Identifiers
-vim.cmd [[highlight link LspSemantic_module PreProc]]
-
-local set_hl_for_floating_window = function()
-  vim.api.nvim_set_hl(0, 'NormalFloat', {
-    link = 'Normal',
-  })
-  vim.api.nvim_set_hl(0, 'FloatBorder', {
-    fg = "#FFFFFF",
-  })
-end
-
-set_hl_for_floating_window()
-
-vim.api.nvim_create_autocmd('ColorScheme', {
-  pattern = '*',
-  desc = 'Avoid overwritten by loading color schemes later',
-  callback = set_hl_for_floating_window,
-})
-
-require('whisper').setup({
-    -- Point to the tool you built in Part 1
-    binary_path = vim.fn.expand("~") .. "/whisper.cpp/main",
-    model_path = vim.fn.expand("~") .. "/whisper.cpp/models/ggml-base.en.bin",
-    -- The key to Start/Stop recording
-    keybind = "<C-g>"
-})
-
-
--- Set up dictate command for whisper dictation
-vim.api.nvim_create_user_command('Dictate', function()
-    local bufnr = vim.api.nvim_get_current_buf()
+    vim.keymap.set('n', '<Leader>c', function() vim.lsp.buf.code_action({diagnostics={}, only={"refactor.rewrite.CaseSplit"}}) end, opts)
+    vim.keymap.set('n', '<Leader>d', function() vim.lsp.buf.code_action({diagnostics={}, only={"refactor.rewrite.AddClause"}}) end, opts)
+    vim.keymap.set('n', '<Leader>p', function() vim.lsp.buf.code_action({diagnostics={}, only={"refactor.rewrite.ExprSearch"}}) end, opts)
+    vim.keymap.set('n', '<Leader>t', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', '<Leader>g', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, opts)
     
-    -- Create the floating window
-    local width = 50
-    local height = 3
-    local opts = {
-        relative = 'editor',
-        width = width,
-        height = height,
-        col = (vim.o.columns - width) / 2,
-        row = (vim.o.lines - height) / 2,
-        style = 'minimal',
-        border = 'rounded'
-    }
+    -- If you previously used a custom_attach(client) function defined elsewhere,
+    -- you can call it here:
+    -- custom_attach(client, bufnr)
+  end,
+})
 
-    local win_buf = vim.api.nvim_create_buf(false, true)
-    local win = vim.api.nvim_open_win(win_buf, true, opts)
-
-    -- Use jobstart inside the terminal to track the exit properly
-    vim.fn.termopen('vim-dictate', {
-        on_exit = function()
-            -- Close window first to return focus to the main buffer
-            if vim.api.nvim_win_is_valid(win) then
-                vim.api.nvim_win_close(win, true)
-            end
-
-            -- Give the OS a split second to finish the file write
-            vim.defer_fn(function()
-                local f = io.open("/tmp/vim_dictate_out.txt", "r")
-                if f then
-                    local content = f:read("*all"):gsub("[\n\r]", "")
-                    f:close()
-                    
-                    if content ~= "" then
-                        -- Schedule the insertion to ensure we are back in the right buffer
-                        vim.schedule(function()
-                            -- 'p' puts it after cursor, 'c' follows current style
-                            vim.api.nvim_put({content}, 'c', true, true)
-                        end)
-                    else
-                        print("Whisper returned no text.")
-                    end
-                else
-                    print("Error: Could not open transcription file.")
-                end
-            end, 100) -- 100ms delay is the "4D Chess" safety margin
-        end
-    })
-
-    vim.cmd('startinsert')
-end, { desc = 'Dictate' })
+-- 2. Enable the server (replaces require('lspconfig').idris2_lsp.setup)
+vim.lsp.enable('idris2_lsp')
 EOF
-
 
 
