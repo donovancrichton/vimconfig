@@ -9,6 +9,7 @@ filetype indent off
 :set expandtab
 :set textwidth=160
 :set clipboard=unnamedplus
+:set termguicolors
 colorscheme donovan
 
 " ------------------------- DIGRAPHS -----------------------
